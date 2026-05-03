@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <router-view></router-view>
+      <h1>这是Main.vue</h1>
   </div>
 </template>
 
