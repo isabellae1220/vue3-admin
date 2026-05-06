@@ -9,7 +9,7 @@
         <common-header/>
       </el-header>
       <el-main class="right-main">
-        main
+        <router-view></router-view>
        </el-main>
      </el-container>
   </el-container>

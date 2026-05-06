@@ -4,6 +4,7 @@
       background-color="#545c64"
       text-color="#fff"
       :collapse="isCollapse"
+      :collapse-transition="false"
       >
 
       <h3 v-show="!isCollapse">通用后台管理器</h3>
