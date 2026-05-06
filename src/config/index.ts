@@ -1,21 +1,13 @@
 const env = (import.meta.env.MODE || 'prod') as 'development' | 'test' | 'prod'
-const EnvConfig={
-  development:{
-    baseApi:'/api',
-    mockApi:'https://apifoxmock.com/m1/4068509-0-default/api'
-  },
-   test:{
-    baseApi:'//test.future.com/api',
-    mockApi:'https://apifoxmock.com/m1/4068509-0-default/api'
-  } ,
-   prod:{
-    baseApi:'//future.com/api',
-    mockApi:'https://apifoxmock.com/m1/4068509-0-default/api'
-  }
+
+const EnvConfig = {
+  development: { baseApi: '/api', mockApi: 'https://apifoxmock.com/...' },
+  test:        { baseApi: '//test.future.com/api', mockApi: 'https://apifoxmock.com/...' },
+  prod:        { baseApi: '//future.com/api', mockApi: 'https://apifoxmock.com/...' }
 }
 
-export default{
+export default {
   env,
-  ...EnvConfig[env],
-  mock:true,
+  ...EnvConfig[env],     // 把当前环境的 baseApi 和 mockApi 展开
+  mock: true,            // 是否使用 Apifox 在线 mock
 }

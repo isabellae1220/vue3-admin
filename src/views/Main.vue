@@ -23,12 +23,16 @@ import CommonHeader from '@/components/CommonHeader.vue'
 </script>
 
 <style  lang="less">
-.common-layout,.lay-container{
-  height:100vw;
+.common-layout, .lay-container {
+  height: 100vh;
 }
-.el-header{
-  background-color: #333;
 
+.right-main {
+  overflow-y: auto;   // 内容超出时滚动
+}
+
+.el-header {
+  background-color: #333;
 }
 
 </style>

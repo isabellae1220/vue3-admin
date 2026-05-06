@@ -6,7 +6,21 @@ export default{
     return request({
       url:'/home/getTableData',
       method:'get',
-      mock:false,
+      // mock:false,
+    })
+  },
+  getCountData(){
+    return request({
+      url:'/home/getCountData',
+      method:'get',
+      // mock:false,
+    })
+  },
+  getChartData(){
+    return request({
+      url:'/home/getChartData',
+      method:'get',
+      // mock:false,
     })
   }
 }
