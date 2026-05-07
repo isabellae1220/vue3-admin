@@ -67,7 +67,7 @@
 import { ref, onMounted, reactive } from 'vue'
 import api from '@/api/api'
 import * as echarts from 'echarts'
-import { x } from 'vue-router/dist/router-CWoNjPRp.mjs'
+
 
 const getImageUrl = (user: string) => {
   return new URL(`../assets/images/${user}.png`, import.meta.url).href

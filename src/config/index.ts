@@ -9,5 +9,5 @@ const EnvConfig = {
 export default {
   env,
   ...EnvConfig[env],     // 把当前环境的 baseApi 和 mockApi 展开
-  mock: true,            // 是否使用 Apifox 在线 mock
+  mock:false,            // 是否使用 Apifox 在线 mock
 }
