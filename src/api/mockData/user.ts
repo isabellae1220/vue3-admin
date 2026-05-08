@@ -61,4 +61,59 @@ export default {
       },
     }
   },
+  /**
+   * 删除用户
+   * @param id
+   * @return {*}
+   */
+  deleteUser: (config:any) => {
+    const { id } = param2Obj(config.url)
+
+    if (!id) {
+      return {
+        code: -999,
+        message: '参数不正确'
+      }
+    } else {
+      List = List.filter(u => u.id !== id)
+      return {
+        code: 200,
+        message: '删除成功'
+      }
+    }
+  },
+  // 在 export default 内加这两个方法
+
+addUser: (config: any) => {
+  const newUser = param2Obj(config.url) as any
+  newUser.id = Mock.Random.guid()
+  newUser.sex = Number(newUser.sex)
+  newUser.age = Number(newUser.age)
+  List.unshift(newUser)   // 插到列表最前面
+  return {
+    code: 200,
+    data: newUser,
+    msg: '新增成功',
+  }
+},
+
+editUser: (config: any) => {
+  const data: any = param2Obj(config.url)
+  const index = List.findIndex(u => u.id === data.id)
+  if (index === -1) {
+    return { code: -999, msg: '用户不存在' }
+  }
+  // 转换类型
+  data.sex = Number(data.sex)
+  data.age = Number(data.age)
+  // 用新数据覆盖
+  List[index] = { ...List[index], ...data }
+  return {
+    code: 200,
+    data: List[index],
+    msg: '编辑成功',
+  }
+},
 }
+
+ 

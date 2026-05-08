@@ -8,6 +8,10 @@ Mock.mock(/\/home\/getCountData/, 'get', homeApi.getCountData)
 Mock.mock(/\/home\/getChartData/, 'get', homeApi.getChartData)
 
 Mock.mock(/\/user\/getUserData/, 'get', userApi.getUserList)
+Mock.mock(/\/user\/deleteUser/, 'get', userApi.deleteUser)
+Mock.mock(/\/user\/addUser/, 'get', userApi.addUser)
+Mock.mock(/\/user\/editUser/, 'get', userApi.editUser)
+
 
 
 

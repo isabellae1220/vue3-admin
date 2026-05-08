@@ -30,5 +30,26 @@ export default{
       data,
       // mock:false,
     })
-  }
+  },
+  deleteUser(data:any){
+    return request({
+      url:'/user/deleteUser',
+      method:'get',
+      data,
+      // mock:false,
+    })
+  },addUser(data: any) {
+  return request({
+    url: '/user/addUser',
+    method: 'get',
+    data,
+  })
+},
+editUser(data: any) {
+  return request({
+    url: '/user/editUser',
+    method: 'get',
+    data,
+  })
+},
 }
