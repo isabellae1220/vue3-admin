@@ -8,6 +8,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
 import '@/api/mock.ts'
 import api from '@/api/api'
+import '@/router/permission'
 
 
 const pinia = createPinia()

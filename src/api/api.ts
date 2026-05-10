@@ -52,4 +52,11 @@ editUser(data: any) {
     data,
   })
 },
+getMenu(params:any){
+  return request({
+    url:'/permission/getMenu',
+    method:'post',
+    data:params
+  })
+}
 }

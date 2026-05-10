@@ -7,6 +7,8 @@
     <!-- 面包屑 -->
       <el-breadcrumb separator="/" class="bread">
   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+  <el-breadcrumb-item v-if="current" :to="current.path">{{ current.label }}</el-breadcrumb-item>
+
      </el-breadcrumb>
     </div>
 
@@ -19,7 +21,7 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -29,17 +31,25 @@
 
 <script lang="ts" setup >
 import { useAllDateStore } from '@/store';
+import{useRouter} from 'vue-router'
+import{computed} from 'vue'
+
 //  import{ref,computed} from 'vue'
 
  const getImageUrl=(user:string)=>{
   return new URL(`../assets/images/${user}.png`, import.meta.url).href
  }
  // 导入store 获取isCollapse的值 并点击取反
+ const router=useRouter()
  const store=useAllDateStore()
  const handleCollapse=()=>{
   store.state.isCollapse=!store.state.isCollapse
  }
-
+ const handleLogout = () => {
+  store.clearRoutes()
+  router.push('/login')
+}
+const current =computed(()=>store.state.currentMeun)
 </script>
 
 <style lang="less" scoped>

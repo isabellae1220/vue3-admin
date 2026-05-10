@@ -40,53 +40,11 @@
  import{ref,computed} from 'vue'
  import { useAllDateStore } from '@/store/index'
  import {useRoute,useRouter} from 'vue-router'
- const list =ref([
-      	{
-          path: '/home',
-          name: 'home',
-          label: '首页',
-          icon: 'House',
-          url: 'Home'
-      	},
-        {
-            path: '/mall',
-            name: 'mall',
-            label: '商品管理',
-            icon: 'VideoPlay',
-            url: 'Mall'
-        },
-        {
-            path: '/user',
-            name: 'user',
-            label: '用户管理',
-            icon: 'User',
-            url: 'User'
-        },
-        {
-            path: 'other',
-            label: '其他',
-            icon: 'Location',
-            children: [
-                {
-                    path: '/page1',
-                    name: 'page1',
-                    label: '页面1',
-                    icon: 'Setting',
-                    url: 'Page1'
-                },
-                {
-                    path: '/page2',
-                    name: 'page2',
-                    label: '页面2',
-                    icon: 'Setting',
-                    url: 'Page2'
-                }
-            ]
-              }
-            ])
-        
-  const noChildren=computed(()=>list.value.filter(item=>!item.children))
-  const hasChildren=computed(()=>list.value.filter(item=>item.children))
+
+ 
+ const list=computed(()=>store.state.menuList)
+  const noChildren=computed(()=>list.value.filter((item:any)=>!item.children))
+  const hasChildren=computed(()=>list.value.filter((item:any)=>item.children))
   // 引入store 从store中获取isCollapse
   const store=useAllDateStore()
   const isCollapse=computed(()=>store.state.isCollapse)
@@ -95,7 +53,6 @@
   const router=useRouter()
   const route=useRoute()
   const activeMeun=computed(()=>route.path)
-
   const handleMeun=(item:any)=>{
  router.push(item.path)
  store.selectMeun(item)
