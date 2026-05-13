@@ -43,6 +43,7 @@ export const useAllDateStore = defineStore('allDate', () => {
 
     const menu = state.value.menuList
     const module = import.meta.glob('../views/**/*.vue')
+console.log('glob扫到的文件:', Object.keys(module))
     const routeArr: any[] = []
 
     menu.forEach((item: any) => {

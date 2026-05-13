@@ -21,6 +21,7 @@ import{reactive}from 'vue'
 import api from '@/api/api'
 import { useAllDateStore } from '@/store';
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus'
 const loginForm=reactive({
   username:'',
   password:''
@@ -29,13 +30,16 @@ const loginForm=reactive({
 const store=useAllDateStore()
 const router =useRouter()
 const handleLogin = async () => {
-  const res = await api.getMenu(loginForm) as any
-  store.setMenuList(res.menuList)  // 这里面会自动addRoute
-  store.state.token = res.token
-    // ↓ 持久化关键三行
-  localStorage.setItem('token', res.token)
-  localStorage.setItem('menuList', JSON.stringify(res.menuList))
-  router.push('/home')
+  try {
+    const res = await api.getMenu(loginForm) as any
+    store.setMenuList(res.menuList)
+    store.state.token = res.token
+    localStorage.setItem('token', res.token)
+    localStorage.setItem('menuList', JSON.stringify(res.menuList))
+    router.push('/home')
+  } catch (err: any) {
+    ElMessage.error(err || '账号或密码错误')
+  }
 }
 
 </script>

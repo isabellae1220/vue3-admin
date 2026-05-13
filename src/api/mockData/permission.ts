@@ -29,7 +29,7 @@ export default {
               name: 'user',
               label: '用户管理',
               icon: 'user',
-              url: 'User'
+              url: 'user'
             },
             {
               path: 'other',

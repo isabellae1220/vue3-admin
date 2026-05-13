@@ -125,16 +125,10 @@ const total = ref(0)
 
 // ============ 弹窗相关 ============
 
-// 弹窗显隐
 const dialogVisible = ref(false)
-
-// 当前操作类型：add 新增 / edit 编辑
 const action = ref<'add' | 'edit'>('add')
-
-// 表单实例引用（用于校验）
 const userForm = ref<FormInstance>()
 
-// 表单数据
 const formUser = reactive({
   id: '',
   name: '',
@@ -144,7 +138,6 @@ const formUser = reactive({
   addr: '',
 })
 
-// 表单校验规则
 const rules = reactive<FormRules>({
   name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
   age: [
@@ -156,7 +149,6 @@ const rules = reactive<FormRules>({
   addr: [{ required: true, message: '请输入地址', trigger: 'blur' }],
 })
 
-// 重置表单数据
 const resetForm = () => {
   formUser.id = ''
   formUser.name = ''
@@ -166,39 +158,33 @@ const resetForm = () => {
   formUser.addr = ''
 }
 
-// 点击"新增"按钮
 const handleAdd = () => {
   action.value = 'add'
   resetForm()
   dialogVisible.value = true
 }
 
-// 点击"编辑"按钮
 const handleEdit = (row: any) => {
   action.value = 'edit'
-  // 把当前行的数据填入表单（注意要做一次拷贝避免引用污染）
-  Object.assign(formUser, row)
-  // 性别从 0/1 数字转字符串（el-option 用的是字符串）
-  formUser.sex = String(row.sex)
+  const rowCopy = JSON.parse(JSON.stringify(row))
+  Object.assign(formUser, rowCopy)
+  formUser.sex = String(rowCopy.sex)
   dialogVisible.value = true
 }
 
-// 点击"取消"
 const handleCancel = () => {
   dialogVisible.value = false
-  userForm.value?.clearValidate()  // 清除校验提示
+  userForm.value?.clearValidate()
 }
 
-// 点击右上角 X
 const handleClose = (done: () => void) => {
   done()
   userForm.value?.clearValidate()
 }
 
-// 点击"确定"提交
 const onSubmit = () => {
   userForm.value?.validate(async (valid) => {
-    if (!valid) return  // 校验未通过
+    if (!valid) return
 
     if (action.value === 'add') {
       await api.addUser({ ...formUser })
@@ -209,26 +195,23 @@ const onSubmit = () => {
     }
 
     dialogVisible.value = false
-    getUserData()  // 重新拉数据
+    getUserData()
   })
 }
 
 // ============ 表格相关 ============
 
-// 搜索
 const handlesearch = () => {
   config.name = formInline.keyWord
   config.page = 1
   getUserData()
 }
 
-// 翻页
 const handleChange = (page: any) => {
   config.page = page
   getUserData()
 }
 
-// 删除
 const handleDelete = (row: any) => {
   ElMessageBox.confirm('你确定要删除吗？', '提示', {
     confirmButtonText: '确定',
@@ -243,13 +226,12 @@ const handleDelete = (row: any) => {
     .catch(() => {})
 }
 
-// 拉数据
 const getUserData = async () => {
   const params = { ...config }
   const data = (await api.getUserData(params)) as any
   tableData.value = data.list.map((item: any) => ({
     ...item,
-    sexLabel: item.sex === 1 ? '男' : '女',
+    sexLabel: item.sex === '1' ? '男' : '女',
   }))
   total.value = data.count
 }
@@ -272,7 +254,6 @@ onMounted(() => {
   justify-content: flex-end;
   display: flex;
 }
-// 修复 inline form 里 select 宽度问题
 .select-clearn :deep(.el-select) {
   width: 200px;
 }

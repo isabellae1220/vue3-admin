@@ -23,32 +23,32 @@ export default{
       // mock:false,
     })
   },
-  getUserData(data:any){
+  getUserData(params:any){
     return request({
-      url:'/user/getUserData',
+      url:'/user',
       method:'get',
-      data,
+      params,
       // mock:false,
     })
   },
   deleteUser(data:any){
     return request({
       url:'/user/deleteUser',
-      method:'get',
+      method:'post',
       data,
       // mock:false,
     })
   },addUser(data: any) {
   return request({
     url: '/user/addUser',
-    method: 'get',
+    method: 'post',
     data,
   })
 },
 editUser(data: any) {
   return request({
-    url: '/user/editUser',
-    method: 'get',
+    url: '/user/updateUser',
+    method: 'post',
     data,
   })
 },

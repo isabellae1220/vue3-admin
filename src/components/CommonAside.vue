@@ -16,7 +16,7 @@
         <span >{{ item.label }}</span>
       </el-menu-item>
 
-      <el-submenu v-for="item in hasChildren" :key="item.path" :index="item.path">
+      <el-sub-menu v-for="item in hasChildren" :key="item.path" :index="item.path">
         <template slot="title">
           <component class="icons" :is="item.icon"></component>
           <span>{{ item.label }}</span>
@@ -29,7 +29,7 @@
         </el-menu-item-group>
     
       
-      </el-submenu>
+      </el-sub-menu>
      
       
     </el-menu>
